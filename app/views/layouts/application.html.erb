@@ -12,6 +12,18 @@
     <%= csrf_meta_tags %>
   </head>
   <body class="<%= params[:controller] %>">
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#">Project name</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div id="container" class="container">
       <header>
         <nav>
@@ -20,13 +32,19 @@
           </ul>
         </nav>
         <%- flash.each do |name, msg| -%>
-          <%= content_tag :div, msg, :id => "flash_\#{name}" if msg.is_a?(String) %>
+          <% if msg.is_a?(String) %>
+          <div class="alert-message <%= name %>">
+            <a class="close" href="#">×</a>
+            <p><%= msg %></p>
+          </div>
+          <% end %>
         <%- end -%>
       </header>
       <div id="main" role="main">
         <%= yield %>
       </div>
       <footer>
+        <p>&copy; Company 2011</p>
       </footer>
     </div> <!--! end of #container -->
   </body>
