@@ -11,7 +11,7 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-  <body class="<%= params[:controller] %>">
+  <body id="<% if content_for?(:body_class) %><%= yield :body_class %><% else %><%= params[:controller] %><% end %>">
     <div class="topbar">
       <div class="fill">
         <div class="container">
@@ -21,16 +21,33 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <div class="pull-right">
+            <ul class="nav">
+              <% if user_signed_in? %>
+                <li>
+                <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>        
+                </li>
+              <% else %>
+                <li>
+                <%= link_to('Login', new_user_session_path)  %>  
+                </li>
+              <% end %>
+              <% if user_signed_in? %>
+                <li>
+                <%= link_to('Edit account', edit_user_registration_path) %>
+                </li>
+              <% else %>
+                <li>
+                <%= link_to('Sign up', new_user_registration_path)  %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
     <div id="container" class="container">
       <header>
-        <nav>
-          <ul class="hmenu">
-            <%= render 'shared/navigation' %>
-          </ul>
-        </nav>
         <%- flash.each do |name, msg| -%>
           <% if msg.is_a?(String) %>
           <div class="alert-message <%= name %>">

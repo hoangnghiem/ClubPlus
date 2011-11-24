@@ -1,33 +1,41 @@
-<h2>Sign in</h2>
+<div class="page-header">
+  <h1>Sign in</h1>
+</div>
+<% content_for :body_class do %>account<% end %>
+<div class="row">
+  <div class="span7 offset1">
+    <h3>Sign in with ClubPlus account</h3>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="clearfix">
-    <%= f.label :email %>
-    <div class="input"><%= f.email_field :email, :class => "xlarge" %></div>
-  </div>
-
-  <div class="clearfix">
-    <%= f.label :password %>
-    <div class="input"><%= f.password_field :password, :class => "xlarge" %></div>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="clearfix">
-      <label>&nbsp;</label>
-      <div class="input">
-        <ul class="inputs-list">
-          <li>
-            <label for="user_remember_me">
-              <%= f.check_box :remember_me %>
-              <span>Remember me</span>
-            </label>
-          </li>
-        </ul>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-stacked"}) do |f| %>
+      <div class="clearfix">
+        <%= f.label :email %>
+        <div class="input"><%= f.email_field :email, :class => "xlarge" %></div>
       </div>
-    </div>
-  <% end -%>
 
-  <div><%= f.submit "Sign in", :class => "btn primary" %></div>
-<% end %>
+      <div class="clearfix">
+        <%= f.label :password %>
+        <div class="input"><%= f.password_field :password, :class => "xlarge" %></div>
+      </div>
 
-<%= render :partial => "devise/shared/links" %>
+      <% if devise_mapping.rememberable? -%>
+        <div class="clearfix">
+          <div class="input">
+            <ul class="inputs-list">
+              <li>
+                <label for="user_remember_me">
+                  <%= f.check_box :remember_me %>
+                  <span>Remember me</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      <% end -%>
+
+      <div><%= f.submit "Sign in", :class => "btn primary" %></div>
+    <% end %>
+
+    <%= render :partial => "devise/shared/links" %>
+  </div>  
+  <div class="span7 offset1"><%= render :partial => "devise/shared/login_services" %></div>
+</div>
