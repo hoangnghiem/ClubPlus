@@ -24,4 +24,8 @@ gem "devise", ">= 1.5.0"
 gem "twitter-bootstrap-rails"
 gem "rails-footnotes", ">= 3.7", :group => :development
 gem 'thin'
+gem "omniauth"
+gem "omniauth-facebook"
+gem "omniauth-openid"
+gem "mongrel", '>= 1.2.0.pre2', :group => :development
 

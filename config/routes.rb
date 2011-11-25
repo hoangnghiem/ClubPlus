@@ -1,5 +1,6 @@
 Clubplus::Application.routes.draw do
-  #get \"users\/show\"
+  
+  match '/auth/:provider/callback' => 'authentications#create'
 
   root :to => "home#index"
 
